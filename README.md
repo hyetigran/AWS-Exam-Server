@@ -146,6 +146,10 @@ local all all md5
 
 Finally, write and quit.
 
+Quit postgres user
+```bash
+exit```
+
 ## Setting up Nginx
 
 To install and cofigure Nginx on your server, follow the following instructions.
@@ -256,9 +260,9 @@ Got to the directory, clone the app and install dependencies. Run the following 
 cd /var/www/html/items-rest
 git clone https://github.com/schoolofcode-me/stores-rest-api.git .
 mkdir log
-sudo apt-get install python-pip python3-dev libpq-dev
-pip install virtualenv
-virtualenv venv --python=python3.5
+sudo apt-get install python3-pip python3-dev libpq-dev
+sudo pip3 install virtualenv
+virtualenv venv --python=python3
 source venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -298,6 +302,9 @@ WantedBy=multi-user.target
 ```
 
 Replace the uwsgi.ini file contents with the following
+```bash
+sudo vi uwsgi.ini
+```
 
 ```bash
 [uwsgi]
