@@ -7,6 +7,7 @@ from db import db
 from resources.exam import Exam, ExamList
 from resources.question import Question
 from resources.answer import Answer
+from resources.user import UserRegister
 
 app = Flask(__name__)
 # app.config['SQALCHEMY_DATABASE_URI'] = os.environ.get(
@@ -14,8 +15,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
+app.secret_key = os.environ.get("JWT_SECRET_KEY")
+
 api.add_resource(Exam, '/exam/<string:gid>')
 api.add_resource(ExamList, '/exams')
+api.add_resource(UserRegister, '/register')
 
 # Disabled endpoints
 # api.add_resource(Question, '/question/<string:gid>')
