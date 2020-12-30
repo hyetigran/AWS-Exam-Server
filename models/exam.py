@@ -15,7 +15,7 @@ class ExamModel(db.Model):
 
     questions = db.relationship('QuestionModel', lazy='dynamic')
 
-    def __init__(self, exam_number, exam_type, correct, current_question, time, is_paused, is_finished):
+    def __init__(self, exam_number, exam_type, correct, current_question, time, is_paused, is_finished, questions):
         self.exam_number = exam_number
         self.exam_type = exam_type
         self.correct = correct

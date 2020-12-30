@@ -7,6 +7,9 @@ class UserRegister(Resource):
     TABLE_NAME = 'users'
 
     parser = reqparse.RequestParser()
+    parser.add_argument('username',
+                        type=str,
+                        )
     parser.add_argument('password',
                         type=str,
                         required=True,
