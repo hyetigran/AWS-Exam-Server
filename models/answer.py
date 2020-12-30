@@ -11,7 +11,7 @@ class AnswerModel(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
     question = db.relationship('QuestionModel')
 
-    def __init__(self, choice, is_selected, is_correct, question_id):
+    def __init__(self, question_id, choice, is_selected, is_correct):
         self.choice = choice
         self.is_selected = is_selected
         self.is_correct = is_correct

@@ -14,7 +14,7 @@ class QuestionModel(db.Model):
     exam = db.relationship('ExamModel')
     answers = db.relationship('AnswerModel', lazy='dynamic')
 
-    def __init__(self, question, explanation, is_multiple_choice, status, exam_id):
+    def __init__(self, exam_id, question, explanation, is_multiple_choice, status):
         self.question = question
         self.explanation = explanation
         self.is_multiple_choice = is_multiple_choice

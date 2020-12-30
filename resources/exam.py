@@ -1,5 +1,8 @@
 from models.exam import ExamModel
+from models.question import QuestionModel
+from models.answer import AnswerModel
 from flask_restful import Resource, reqparse
+from flask_jwt import jwt_required
 import sys
 
 
@@ -12,6 +15,7 @@ class Exam(Resource):
     parser.add_argument('time', type=str, required=True)
     parser.add_argument('is_paused', type=int, required=True)
     parser.add_argument('is_finished', type=int, required=True)
+    parser.add_argument('questions', type=dict, required=True)
 
     def get(self, gid):
         exam = ExamModel.find_by_id(gid)
@@ -19,12 +23,26 @@ class Exam(Resource):
             return exam.json()
         return {"message": "Exam not found"}, 404
 
+    @jwt_required()
     def post(self, gid):
+        # endpoint for site admin only
         data = Exam.parser.parse_args()
-        # print(data, file=sys.stderr)
-        exam = ExamModel(**data)
+        exam_number, exam_type, correct, current_question, time, is_paused, is_finished, questions = data.values()
+        exam = ExamModel(exam_number, exam_type, correct,
+                         current_question, time, is_paused, is_finished, questions)
         try:
             exam.save_to_db()
+            for question in questions.values():
+
+                question, explanation, is_multiple_choice, status, answers = question.values()
+                new_question = QuestionModel(
+                    exam.id, question, explanation, is_multiple_choice, status)
+                new_question.save_to_db()
+                for answer in answers.values():
+                    choice, is_selected, is_correct = answer.values()
+                    new_answer = AnswerModel(
+                        new_question.id, choice, is_selected, is_correct)
+                    new_answer.save_to_db()
         except:
             return {"message": "Error occured"}, 500
         return exam.json(), 201
