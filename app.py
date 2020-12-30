@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 app.config["DEBUG"] = True
 
-app.config['SQALCHEMY_DATABASE_URI'] = os.environ.get(
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL', 'sqlite:///data.db')
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
