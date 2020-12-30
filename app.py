@@ -13,6 +13,9 @@ from resources.answer import Answer
 from resources.user import UserRegister
 
 app = Flask(__name__)
+
+app.config["DEBUG"] = True
+
 app.config['SQALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL', 'sqlite:///data.db')
 
