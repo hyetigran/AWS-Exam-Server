@@ -22,8 +22,8 @@ app.config['SQALCHEMY_DATABASE_URI'] = os.environ.get(
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
-app.secret_key = "whatever"
-
+app.secret_key = os.environ.get(
+    "JWT_SECRET_KEY", "")
 jwt = JWT(app, authenticate, identity)
 api.add_resource(Exam, '/exam/<string:gid>')
 api.add_resource(ExamList, '/exams')
