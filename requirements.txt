@@ -5,3 +5,4 @@ Flask-JWT
 uwsgi
 psycopg2
 python-dotenv
+flask-cors
