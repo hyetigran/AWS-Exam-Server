@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
+from flask_cors import CORS
 from dotenv import load_dotenv
 # from db import db
 
@@ -13,6 +14,7 @@ from resources.answer import Answer
 from resources.user import UserRegister
 
 app = Flask(__name__)
+CORS(app)
 load_dotenv(".env")
 app.config["DEBUG"] = True
 
