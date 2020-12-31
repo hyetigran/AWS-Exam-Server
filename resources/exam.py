@@ -3,7 +3,6 @@ from models.question import QuestionModel
 from models.answer import AnswerModel
 from flask_restful import Resource, reqparse
 from flask_jwt import jwt_required
-import sys
 
 
 class Exam(Resource):
@@ -33,10 +32,9 @@ class Exam(Resource):
         try:
             exam.save_to_db()
             for question in questions.values():
-
-                question, explanation, is_multiple_choice, status, answers = question.values()
+                status, question, explanation, is_multiple_choice, answers = question.values()
                 new_question = QuestionModel(
-                    exam.id, question, explanation, is_multiple_choice, status)
+                    question, explanation, is_multiple_choice, status, exam.id)
                 new_question.save_to_db()
                 for answer in answers.values():
                     choice, is_selected, is_correct = answer.values()

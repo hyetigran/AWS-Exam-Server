@@ -1,6 +1,5 @@
 from models.question import QuestionModel
 from flask_restful import Resource, reqparse
-import sys
 
 
 class Question(Resource):
@@ -14,7 +13,6 @@ class Question(Resource):
     # Disabled
     # def post(self, gid):
     #     data = Question.parser.parse_args()
-    #     # print(data, file=sys.stderr)
     #     question = QuestionModel(**data)
     #     try:
     #         question.save_to_db()

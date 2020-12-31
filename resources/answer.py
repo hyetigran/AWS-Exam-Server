@@ -1,6 +1,5 @@
 from models.answer import AnswerModel
 from flask_restful import Resource, reqparse
-import sys
 
 
 class Answer(Resource):
