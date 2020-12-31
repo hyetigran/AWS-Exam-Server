@@ -45,6 +45,14 @@ class Exam(Resource):
             return {"message": "Error occured"}, 500
         return exam.json(), 201
 
+    @jwt_required()
+    def delete(self, gid):
+        exam = ExamModel.find_by_id(gid)
+        if exam:
+            exam.delete_from_db()
+
+        return {"message": "Exam deleted"}
+
 
 class ExamList(Resource):
     def get(self):
